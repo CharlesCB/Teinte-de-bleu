@@ -6,18 +6,18 @@ import peasy.*;
 
 MidiInput bus;
 
-PImage imgLaura, laura, imgSimon, simon, imgEstelle, estelle, imgHudson, hudson;
-PImage imgLaura2, laura2, imgSimon2, simon2, imgEstelle2, estelle2, imgHudson2, hudson2;
+PImage imgFace, face, imgGarcon, garcon, imgJu, ju, imgPaysage, paysage;
+PImage imgFace2, face2, imgGarcon2, garcon2, imgJu2, ju2, imgPaysage2, paysage2;
 float rand = 2;
 float alpha = 35;
 float blancAlpha = 0;
 float noirAlpha = 0;
 float un, deux, trois, quatre;
 float plus, moins;
-boolean lauraCamp = true, simonCamp = true, estelleCamp = true, hudsonCamp = true;
-boolean hudsonBack = false, simonBack = false, lauraBack=false, estelleBack = false; 
-boolean laura2Camp = false, simon2Camp = false, estelle2Camp = false, hudson2Camp = false;
-boolean hudson2Back = false, simon2Back = false, laura2Back=false, estelle2Back = false; 
+boolean faceBool = true, garconBool = true, juCamp = true, paysageCamp = true;
+boolean paysageBack = false, garconBack = false, faceBack=false, juBack = false; 
+boolean face2Camp = false, garcon2Camp = false, ju2Camp = false, paysage2Camp = false;
+boolean paysage2Back = false, garcon2Back = false, face2Back=false, ju2Back = false; 
 int tete = 1;
 boolean juliette = false, cafe = false;
 boolean fin = false;
@@ -42,53 +42,53 @@ void setup() {
 
   sol = new Ple_Terrain(this, loc, 280, 150, 5, 5);
 
-  imgHudson = loadImage("paysage.jpg");
-  imgHudson.resize(width, height);
-  hudson = createImage(displayWidth, displayHeight, RGB);
-  imgHudson.loadPixels();
-  hudson = imgHudson.get();
+  imgPaysage = loadImage("paysage.jpg");
+  imgPaysage.resize(width, height);
+  paysage = createImage(displayWidth, displayHeight, RGB);
+  imgPaysage.loadPixels();
+  paysage = imgPaysage.get();
 
-  imgLaura = loadImage("julietteFace.jpg");
-  imgLaura.resize(width, height);
-  laura = createImage(displayWidth, displayHeight, RGB);
-  imgLaura.loadPixels();
-  laura = imgLaura.get();
+  imgFace = loadImage("julietteFace.jpg");
+  imgFace.resize(width, height);
+  face = createImage(displayWidth, displayHeight, RGB);
+  imgFace.loadPixels();
+  face = imgFace.get();
 
-  imgSimon = loadImage("garcon.jpg");
-  imgSimon.resize(width, height);
-  simon = createImage(displayWidth, displayHeight, RGB);
-  imgSimon.loadPixels();
-  simon = imgSimon.get();
+  imgGarcon = loadImage("garcon.jpg");
+  imgGarcon.resize(width, height);
+  garcon = createImage(displayWidth, displayHeight, RGB);
+  imgGarcon.loadPixels();
+  garcon = imgGarcon.get();
 
-  imgEstelle = loadImage("binoche30.jpg");
-  imgEstelle.resize(width, height);
-  estelle = createImage(displayWidth, displayHeight, RGB);
-  imgEstelle.loadPixels();
-  estelle = imgEstelle.get();
+  imgJu = loadImage("binoche30.jpg");
+  imgJu.resize(width, height);
+  ju = createImage(displayWidth, displayHeight, RGB);
+  imgJu.loadPixels();
+  ju = imgJu.get();
 
-  imgHudson2 = loadImage("paysage.jpg");
-  imgHudson2.resize(width, height);
-  hudson2 = createImage(displayWidth, displayHeight, RGB);
-  imgHudson2.loadPixels();
-  hudson2 = imgHudson2.get();
+  imgPaysage2 = loadImage("paysage.jpg");
+  imgPaysage2.resize(width, height);
+  paysage2 = createImage(displayWidth, displayHeight, RGB);
+  imgPaysage2.loadPixels();
+  paysage2 = imgPaysage2.get();
 
-  imgLaura2 = loadImage("julietteFace.jpg");
-  imgLaura2.resize(width, height);
-  laura2 = createImage(displayWidth, displayHeight, RGB);
-  imgLaura2.loadPixels();
-  laura2 = imgLaura2.get();
+  imgFace2 = loadImage("julietteFace.jpg");
+  imgFace2.resize(width, height);
+  face2 = createImage(displayWidth, displayHeight, RGB);
+  imgFace2.loadPixels();
+  face2 = imgFace2.get();
 
-  imgSimon2 = loadImage("garcon.jpg");
-  imgSimon2.resize(width, height);
-  simon2 = createImage(displayWidth, displayHeight, RGB);
-  imgSimon2.loadPixels();
-  simon2 = imgSimon2.get();
+  imgGarcon2 = loadImage("garcon.jpg");
+  imgGarcon2.resize(width, height);
+  garcon2 = createImage(displayWidth, displayHeight, RGB);
+  imgGarcon2.loadPixels();
+  garcon2 = imgGarcon2.get();
 
-  imgEstelle2 = loadImage("binoche30.jpg");
-  imgEstelle2.resize(width, height);
-  estelle2 = createImage(displayWidth, displayHeight, RGB);
-  imgEstelle2.loadPixels();
-  estelle2 = imgEstelle2.get();
+  imgJu2 = loadImage("binoche30.jpg");
+  imgJu2.resize(width, height);
+  ju2 = createImage(displayWidth, displayHeight, RGB);
+  imgJu2.loadPixels();
+  ju2 = imgJu2.get();
 
   bus = RWMidi.getInputDevices()[3].createInput(this);
   background(0);
@@ -106,124 +106,124 @@ void noteOnReceived(Note note) {
   println(note.getPitch());
   if (fin == false) {
     if (note.getPitch() == 36) {
-      //laura
-      if (lauraCamp) {
-        lauraCamp = false;
+      //face
+      if (faceBool) {
+        faceBool = false;
       } else {
-        lauraCamp = true;
+        faceBool = true;
       }
     }
     if (note.getPitch() == 37) {
-      //simon
-      if (simonCamp) {
-        simonCamp = false;
+      //garcon
+      if (garconBool) {
+        garconBool = false;
       } else {
-        simonCamp = true;
+        garconBool = true;
       }
     }
     if (note.getPitch() == 38) {
-      //estelle
-      if (estelleCamp) {
-        estelleCamp = false;
+      //ju
+      if (juCamp) {
+        juCamp = false;
       } else {
-        estelleCamp = true;
+        juCamp = true;
       }
     }
     if (note.getPitch() == 39) {
-      //hudson
-      if (hudsonCamp) {
-        hudsonCamp = false;
+      //paysage
+      if (paysageCamp) {
+        paysageCamp = false;
       } else {
-        hudsonCamp = true;
+        paysageCamp = true;
       }
     }
     if (note.getPitch() == 40) {
-      if (lauraBack) {
-        lauraBack = false;
+      if (faceBack) {
+        faceBack = false;
       } else {
-        lauraBack = true;
+        faceBack = true;
       }
     }
     if (note.getPitch() == 41) {
-      if (simonBack) {
-        simonBack = false;
+      if (garconBack) {
+        garconBack = false;
       } else {
-        simonBack = true;
+        garconBack = true;
       }
     }
     if (note.getPitch() == 42) {
-      if (estelleBack) {
-        estelleBack = false;
+      if (juBack) {
+        juBack = false;
       } else {
-        estelleBack = true;
+        juBack = true;
       }
     }
     if (note.getPitch() == 43) {
-      if (hudsonBack) {
-        hudsonBack = false;
+      if (paysageBack) {
+        paysageBack = false;
       } else {
-        hudsonBack = true;
+        paysageBack = true;
       }
     }
   } else {
     if (note.getPitch() == 36) {
-      //laura
-      if (laura2Camp) {
-        laura2Camp = false;
+      //face
+      if (face2Camp) {
+        face2Camp = false;
       } else {
-        laura2Camp = true;
+        face2Camp = true;
       }
     }
     if (note.getPitch() == 37) {
-      //simon
-      if (simon2Camp) {
-        simon2Camp = false;
+      //garcon
+      if (garcon2Camp) {
+        garcon2Camp = false;
       } else {
-        simon2Camp = true;
+        garcon2Camp = true;
       }
     }
     if (note.getPitch() == 38) {
-      //estelle
-      if (estelle2Camp) {
-        estelle2Camp = false;
+      //ju
+      if (ju2Camp) {
+        ju2Camp = false;
       } else {
-        estelle2Camp = true;
+        ju2Camp = true;
       }
     }
     if (note.getPitch() == 39) {
-      //hudson
-      if (hudson2Camp) {
-        hudson2Camp = false;
+      //paysage
+      if (paysage2Camp) {
+        paysage2Camp = false;
       } else {
-        hudson2Camp = true;
+        paysage2Camp = true;
       }
     }
     if (note.getPitch() == 40) {
-      if (laura2Back) {
-        laura2Back = false;
+      if (face2Back) {
+        face2Back = false;
       } else {
-        laura2Back = true;
+        face2Back = true;
       }
     }
     if (note.getPitch() == 41) {
-      if (simon2Back) {
-        simon2Back = false;
+      if (garcon2Back) {
+        garcon2Back = false;
       } else {
-        simon2Back = true;
+        garcon2Back = true;
       }
     }
     if (note.getPitch() == 42) {
-      if (estelle2Back) {
-        estelle2Back = false;
+      if (ju2Back) {
+        ju2Back = false;
       } else {
-        estelle2Back = true;
+        ju2Back = true;
       }
     }
     if (note.getPitch() == 43) {
-      if (hudson2Back) {
-        hudson2Back = false;
+      if (paysage2Back) {
+        paysage2Back = false;
       } else {
-        hudson2Back = true;
+        paysage2Back = true;
       }
     }
   }
@@ -324,10 +324,10 @@ void draw() {
   noirAlpha = map(quatre, 0, 127, 0, 255);
 
   if (frameCount == 50) {
-    lauraCamp = false;
-    simonCamp = false;
-    estelleCamp = false;
-    hudsonCamp = false;
+    faceBool = false;
+    garconBool = false;
+    juCamp = false;
+    paysageCamp = false;
   }
 
   if (juliette == true) {
@@ -372,64 +372,64 @@ void draw() {
     }
   }
   if (fin == false) {
-    if (hudsonCamp) {
-      rand(hudson);
+    if (paysageCamp) {
+      rand(paysage);
     } 
-    if (hudsonBack) {
-      contour(imgHudson, hudson);
+    if (paysageBack) {
+      contour(imgPaysage, paysage);
     }
-    if (lauraCamp) {
-      rand(laura);
+    if (faceBool) {
+      rand(face);
     }
-    if (lauraBack) {
-      contour(imgLaura, laura);
+    if (faceBack) {
+      contour(imgFace, face);
     }
-    if (simonCamp) {
-      rand(simon);
+    if (garconBool) {
+      rand(garcon);
     }
-    if (simonBack) {
-      contour(imgSimon, simon);
+    if (garconBack) {
+      contour(imgGarcon, garcon);
     }
 
-    if (estelleCamp) {
-      rand(estelle);
+    if (juCamp) {
+      rand(ju);
     }
-    if (estelleBack) {
-      contour(imgEstelle, estelle);
+    if (juBack) {
+      contour(imgJu, ju);
     }
   } else {
-    if (hudson2Camp) {
-      randFin(hudson2);
+    if (paysage2Camp) {
+      randFin(paysage2);
     } 
-    if (hudson2Back) {
-      contour(imgHudson2, hudson2);
+    if (paysage2Back) {
+      contour(imgPaysage2, paysage2);
     }
-    if (laura2Camp) {
-      randFin(laura2);
+    if (face2Camp) {
+      randFin(face2);
     }
-    if (laura2Back) {
-      contour(imgLaura2, laura2);
+    if (face2Back) {
+      contour(imgFace2, face2);
     }
-    if (simon2Camp) {
-      randFin(simon2);
+    if (garcon2Camp) {
+      randFin(garcon2);
     }
-    if (simon2Back) {
-      contour(imgSimon2, simon2);
+    if (garcon2Back) {
+      contour(imgGarcon2, garcon2);
     }
-    if (estelle2Camp) {
-      randFin(estelle2);
+    if (ju2Camp) {
+      randFin(ju2);
     }
-    if (estelle2Back) {
-      contour(imgEstelle2, estelle2);
+    if (ju2Back) {
+      contour(imgJu2, ju2);
     }
   }
 
   if (fin == false) {
-    println("lauraBack : "+lauraBack, "| simonBack : "+simonBack, "| estelleBack : "+estelleBack, "| hudsonBack : "+hudsonBack);
-    println("laura     : "+lauraCamp, "|  simon    : "+simonCamp, "| estelle     : "+estelleCamp, "| hudson     : "+hudsonCamp);
+    println("faceBack : "+faceBack, "| garconBack : "+garconBack, "| juBack : "+juBack, "| paysageBack : "+paysageBack);
+    println("face     : "+faceBool, "|  garcon    : "+garconBool, "| ju     : "+juCamp, "| paysage     : "+paysageCamp);
   } else {
-    println("FIN : lauraBack : "+laura2Back, "| simonBack : "+simon2Back, "| estelleBack : "+estelle2Back, "| hudsonBack : "+hudson2Back);
-    println("FIN : laura     : "+laura2Camp, "|  simon    : "+simon2Camp, "| estelle     : "+estelle2Camp, "| hudson     : "+hudson2Camp);
+    println("FIN : faceBack : "+face2Back, "| garconBack : "+garcon2Back, "| juBack : "+ju2Back, "| paysageBack : "+paysage2Back);
+    println("FIN : face     : "+face2Camp, "|  garcon    : "+garcon2Camp, "| ju     : "+ju2Camp, "| paysage     : "+paysage2Camp);
   }
   println(frameRate);
   println(fin);
