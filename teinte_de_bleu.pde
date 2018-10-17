@@ -9,14 +9,14 @@ MidiInput bus;
 PImage imgFace, face, imgGarcon, garcon, imgJu, ju, imgPaysage, paysage;
 PImage imgFace2, face2, imgGarcon2, garcon2, imgJu2, ju2, imgPaysage2, paysage2;
 float rand = 2;
-float alpha = 35;
+float alpha = 0;
 float blancAlpha = 0;
 float noirAlpha = 0;
 float un, deux, trois, quatre;
 float plus, moins;
-boolean faceBool = true, garconBool = true, juCamp = true, paysageCamp = true;
+boolean faceBool = true, garconBool = true, juBool = true, paysageBool = true;
 boolean paysageBack = false, garconBack = false, faceBack=false, juBack = false; 
-boolean face2Camp = false, garcon2Camp = false, ju2Camp = false, paysage2Camp = false;
+boolean face2Bool = false, garcon2Bool = false, ju2Bool = false, paysage2Bool = false;
 boolean paysage2Back = false, garcon2Back = false, face2Back=false, ju2Back = false; 
 int tete = 1;
 boolean juliette = false, cafe = false;
@@ -35,8 +35,6 @@ void setup() {
   fullScreen(P3D);
   noCursor();
   frameRate(24);
-
-  //cam = new PeasyCam(this, 1100);
 
   Vec3D loc = new Vec3D(0, 0, 0);
 
@@ -123,18 +121,18 @@ void noteOnReceived(Note note) {
     }
     if (note.getPitch() == 38) {
       //ju
-      if (juCamp) {
-        juCamp = false;
+      if (juBool) {
+        juBool = false;
       } else {
-        juCamp = true;
+        juBool = true;
       }
     }
     if (note.getPitch() == 39) {
       //paysage
-      if (paysageCamp) {
-        paysageCamp = false;
+      if (paysageBool) {
+        paysageBool = false;
       } else {
-        paysageCamp = true;
+        paysageBool = true;
       }
     }
     if (note.getPitch() == 40) {
@@ -168,34 +166,34 @@ void noteOnReceived(Note note) {
   } else {
     if (note.getPitch() == 36) {
       //face
-      if (face2Camp) {
-        face2Camp = false;
+      if (face2Bool) {
+        face2Bool = false;
       } else {
-        face2Camp = true;
+        face2Bool = true;
       }
     }
     if (note.getPitch() == 37) {
       //garcon
-      if (garcon2Camp) {
-        garcon2Camp = false;
+      if (garcon2Bool) {
+        garcon2Bool = false;
       } else {
-        garcon2Camp = true;
+        garcon2Bool = true;
       }
     }
     if (note.getPitch() == 38) {
       //ju
-      if (ju2Camp) {
-        ju2Camp = false;
+      if (ju2Bool) {
+        ju2Bool = false;
       } else {
-        ju2Camp = true;
+        ju2Bool = true;
       }
     }
     if (note.getPitch() == 39) {
       //paysage
-      if (paysage2Camp) {
-        paysage2Camp = false;
+      if (paysage2Bool) {
+        paysage2Bool = false;
       } else {
-        paysage2Camp = true;
+        paysage2Bool = true;
       }
     }
     if (note.getPitch() == 40) {
@@ -326,8 +324,8 @@ void draw() {
   if (frameCount == 50) {
     faceBool = false;
     garconBool = false;
-    juCamp = false;
-    paysageCamp = false;
+    juBool = false;
+    paysageBool = false;
   }
 
   if (juliette == true) {
@@ -344,7 +342,9 @@ void draw() {
       if (tete > 126 && jAlpha > 0) {
         jAlpha -= 15;
       }
-      tete ++;
+      if (frameCount % 2 == 0) {
+        tete ++;
+      }
     } else {
       juliette = false;
       tete = 1;
@@ -365,14 +365,16 @@ void draw() {
       if (tete > 700 && jAlpha > 0) {
         jAlpha -= 15;
       }
-      tete ++;
+      if (frameCount % 2 == 0) {
+        tete ++;
+      }
     } else {
       cafe = false;
       tete = 1;
     }
   }
   if (fin == false) {
-    if (paysageCamp) {
+    if (paysageBool) {
       rand(paysage);
     } 
     if (paysageBack) {
@@ -391,32 +393,32 @@ void draw() {
       contour(imgGarcon, garcon);
     }
 
-    if (juCamp) {
+    if (juBool) {
       rand(ju);
     }
     if (juBack) {
       contour(imgJu, ju);
     }
   } else {
-    if (paysage2Camp) {
+    if (paysage2Bool) {
       randFin(paysage2);
     } 
     if (paysage2Back) {
       contour(imgPaysage2, paysage2);
     }
-    if (face2Camp) {
+    if (face2Bool) {
       randFin(face2);
     }
     if (face2Back) {
       contour(imgFace2, face2);
     }
-    if (garcon2Camp) {
+    if (garcon2Bool) {
       randFin(garcon2);
     }
     if (garcon2Back) {
       contour(imgGarcon2, garcon2);
     }
-    if (ju2Camp) {
+    if (ju2Bool) {
       randFin(ju2);
     }
     if (ju2Back) {
@@ -426,10 +428,10 @@ void draw() {
 
   if (fin == false) {
     println("faceBack : "+faceBack, "| garconBack : "+garconBack, "| juBack : "+juBack, "| paysageBack : "+paysageBack);
-    println("face     : "+faceBool, "|  garcon    : "+garconBool, "| ju     : "+juCamp, "| paysage     : "+paysageCamp);
+    println("face     : "+faceBool, "|  garcon    : "+garconBool, "| ju     : "+juBool, "| paysage     : "+paysageBool);
   } else {
     println("FIN : faceBack : "+face2Back, "| garconBack : "+garcon2Back, "| juBack : "+ju2Back, "| paysageBack : "+paysage2Back);
-    println("FIN : face     : "+face2Camp, "|  garcon    : "+garcon2Camp, "| ju     : "+ju2Camp, "| paysage     : "+paysage2Camp);
+    println("FIN : face     : "+face2Bool, "|  garcon    : "+garcon2Bool, "| ju     : "+ju2Bool, "| paysage     : "+paysage2Bool);
   }
   println(frameRate);
   println(fin);
