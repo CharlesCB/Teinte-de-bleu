@@ -2,7 +2,6 @@ import rwmidi.*;
 import processing.opengl.*;
 import toxi.geom.*;
 import plethora.core.*;
-import peasy.*;
 
 MidiInput bus;
 
@@ -13,22 +12,19 @@ float alpha = 0;
 float blancAlpha = 0;
 float noirAlpha = 0;
 float un, deux, trois, quatre;
-float plus, moins;
+float moins;
 boolean faceBool = true, garconBool = true, juBool = true, paysageBool = true;
 boolean paysageBack = false, garconBack = false, faceBack=false, juBack = false; 
 boolean face2Bool = false, garcon2Bool = false, ju2Bool = false, paysage2Bool = false;
 boolean paysage2Back = false, garcon2Back = false, face2Back=false, ju2Back = false; 
 int tete = 1;
-boolean juliette = false, cafe = false;
+boolean juliette = false, cafe = false, cig = false;
 boolean fin = false;
 float jAlpha;
 
 float[][] data;
 
 Ple_Terrain sol;
-
-int DIMX = 100;
-int DIMY = 100;
 
 void setup() {
   //size(960, 540);
@@ -226,12 +222,15 @@ void noteOnReceived(Note note) {
     }
   }
   if (note.getPitch() == 0) {
-    juliette = true;
+    cig = true;
   }
   if (note.getPitch() == 1) {
-    cafe = true;
+    juliette = true;
   }
   if (note.getPitch() == 2) {
+    cafe = true;
+  }
+  if (note.getPitch() == 3) {
     if (fin) {
       fin = false;
     } else {
@@ -347,6 +346,29 @@ void draw() {
       }
     } else {
       juliette = false;
+      tete = 1;
+    }
+  }
+  
+    if (cig == true) {
+    if (tete <= 149) {
+      data = sol.loadImageToBuffer("cig"+ tete +".jpg");
+      sol.loadBufferasHeight(data, 250, 0);
+      stroke(0, jAlpha);
+      strokeWeight(1);
+      sol.drawLines(true, false, true);
+      sol.display();
+      if (tete < 136 && jAlpha < 255) {
+        jAlpha += 10;
+      }
+      if (tete > 126 && jAlpha > 0) {
+        jAlpha -= 15;
+      }
+      if (frameCount % 2 == 0) {
+        tete ++;
+      }
+    } else {
+      cig = false;
       tete = 1;
     }
   }
