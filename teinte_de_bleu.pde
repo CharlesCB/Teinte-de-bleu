@@ -36,19 +36,23 @@ void setup() {
 
   sol = new Ple_Terrain(this, loc, 280, 150, 5, 5);
 
-  imgPaysage = loadImage("paysage.jpg");
+  //imgPaysage = loadImage("paysage.jpg");
+  //imgPaysage = loadImage("telephone.jpg");
+  imgPaysage = loadImage("pulpeuse.jpg");
   imgPaysage.resize(width, height);
   paysage = createImage(displayWidth, displayHeight, RGB);
   imgPaysage.loadPixels();
   paysage = imgPaysage.get();
 
-  imgFace = loadImage("julietteFace.jpg");
+  imgFace = loadImage("peigne.jpg");
   imgFace.resize(width, height);
   face = createImage(displayWidth, displayHeight, RGB);
   imgFace.loadPixels();
   face = imgFace.get();
 
-  imgGarcon = loadImage("garcon.jpg");
+  //imgGarcon = loadImage("garcon.jpg");
+  //imgGarcon = loadImage("garcon2.png");
+  imgGarcon = loadImage("monsieur.jpg");
   imgGarcon.resize(width, height);
   garcon = createImage(displayWidth, displayHeight, RGB);
   imgGarcon.loadPixels();
@@ -60,7 +64,8 @@ void setup() {
   imgJu.loadPixels();
   ju = imgJu.get();
 
-  imgPaysage2 = loadImage("paysage.jpg");
+  imgPaysage2 = loadImage("amante.png");
+  //imgPaysage2 = loadImage("paysage.jpg");
   imgPaysage2.resize(width, height);
   paysage2 = createImage(displayWidth, displayHeight, RGB);
   imgPaysage2.loadPixels();
@@ -374,7 +379,7 @@ void draw() {
   }
 
   if (cafe == true) {
-    if (tete <= 823) {
+    if (tete <= 700) {
       data = sol.loadImageToBuffer("cafe"+ tete +".jpg");
       sol.loadBufferasHeight(data, 250, 0);
       stroke(180, jAlpha);
